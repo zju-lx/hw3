@@ -35,3 +35,13 @@ impl<T> Drop for MyRc<T> {
         }
     }
 }
+
+use std::ops::Deref;
+impl<T> Deref for MyRc<T> {
+    type Target = T;
+    fn deref(&self) -> &Self::Target {
+        unsafe{
+        &(*self.0).value
+        }
+    }
+}
